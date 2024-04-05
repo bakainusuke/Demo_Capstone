@@ -4,6 +4,7 @@ from upload_page import Ui_UploadWindow
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        self.window = MainWindow
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -46,9 +47,11 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def show_upload_page(self):
-        # Show upload page widgets
-        self.upload_page_widgets = Ui_UploadWindow()
-        self.upload_page_widgets.setupUi(MainWindow)
+        self.upload_page = QtWidgets.QMainWindow()
+        self.ui_upload_page = Ui_UploadWindow()
+        self.ui_upload_page.setupUi(self.upload_page, self.window)
+        self.upload_page.show()
+        self.window.hide()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
